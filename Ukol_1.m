@@ -2,7 +2,7 @@
 
 % % Nadefinované podmínky
 T1 = 298; % K
-p1 = 01*10^6; % Pa
+p1 = 0.1*10^6; % Pa
 
 T2 = 500; % K
 p2 = 10*10^6; % Pa
@@ -29,7 +29,7 @@ S1 = So;
 
 % % Mezivýpočty
 % Přepočet Cp na Cv
-R = 8314;
+R = 8.314;
 Cvo = @(t) Cpo(t) - R;
 
 % Výpočet V1 a V2
