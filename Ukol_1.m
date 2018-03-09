@@ -2,7 +2,7 @@
 
 % % Nadefinované podmínky
 T1 = 298; % K
-p1 = 0.1*10^6; % Pa
+p1 = 01*10^6; % Pa
 
 T2 = 500; % K
 p2 = 10*10^6; % Pa
@@ -18,10 +18,10 @@ E = -0.159494;
 G = 259.0290;
 
 % Funkce
-% St = @(t) A*log(t) + B*t + (C*t.^2)/2 + (D*t.^3)/3 -E/(2*t.^2) + G;
+% St = @(t) A*log(t) + B*t + (C*t^2)/2 + (D*t^3)/3 -E/(2*t^2) + G;
 Cpot = @(t) A + B*t + C*t.^2 + D*t.^3 - E./(t.^2);
 % S = @(t) Sot(t/1000); % J/(mol*K)
-Cpo = @(t) Cpot(t./1000); % J/(mol*K)
+Cpo = @(t) Cpot(t/1000); % J/(mol*K)
 
 % Hodnoty
 So = 223.08; % J/(mol*K)
@@ -29,7 +29,7 @@ S1 = So;
 
 % % Mezivýpočty
 % Přepočet Cp na Cv
-R = 8.314;
+R = 8314;
 Cvo = @(t) Cpo(t) - R;
 
 % Výpočet V1 a V2
