@@ -1,3 +1,15 @@
-ro_rk_a = 0.975029004894059 g/cm^3
+ro_oct = 11.4174563570428 mol/l
 
-ro_r_a = 0.100979666038591 g/cm^3
+ro_dcp = 9.32709171288515 mol/l
+
+ro_smes_rk_a = 9.77448189162235 mol/l
+
+ro_smes_rk_k = 9.85667466586477 mol/l
+
+ro_smes_rk_j = 9.78550432988241 mol/l
+
+ro_smes_r_a = 1.01230210810346 mol/l
+
+ro_smes_r_k = 1.02046176794495 mol/l
+
+ro_smes_r_j = 1.01343643589259 mol/l
