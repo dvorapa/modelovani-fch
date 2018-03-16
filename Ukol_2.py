@@ -1,4 +1,4 @@
-### Skript pro výpočet hustoty dvojice kapalin kyselina octová - 1,2-dichloropropan
+### Skript pro výpočet hustoty dvojice kapalin kyselina octová - 1,2-dichloropropan 1:3
 from sympy import *
 Vm = Symbol('Vm')
 Tk = Symbol('Tk')
@@ -9,15 +9,13 @@ R = 8.314
 T = 273.15 + 25 # K
 p = 101325 # Pa
 
-# Kritické veličiny pro kys. octovou (Prausnitz, 2001; NIST, 2018)
+# Kritické veličiny pro kys. octovou (Prausnitz et al., 2001; NIST, 2018)
 Tk_oct = 592.7 # K
 pk_oct = 57.9 * 10**5 # Pa
-Mw_oct = 60.0520 # g/mol
 
-# Kritické veličiny pro 1,2-dichloropropan (Steele, et al., 1997; NIST, 2018)
+# Kritické veličiny pro 1,2-dichloropropan (Steele et al., 1997; NIST, 2018)
 Tk_dcp = 578 # K
 pk_dcp = 46.5 * 10**5 # Pa
-Mw_dcp = 112.986 # g/mol
 
 ## Redlich-Kwong
 a = (0.42748*(R**2)*(Tk**2.5))/pk
@@ -30,8 +28,7 @@ for k in koreny_oct:
     if im(k) < 10**21:
         koreny_oct_re.append(re(k))
 Vm_oct = min(koreny_oct_re)
-ro_oct_ = 5.84 # mol/l (NIST, 2018)
-ro_oct = 1/(Vm_oct*(10**3))
+ro_oct_rk = 1/(Vm_oct*(10**3))
 
 koreny_dcp = solve(rovnice_.subs([(Tk, Tk_dcp), (pk, pk_dcp)]), Vm)
 koreny_dcp_re = []
@@ -39,8 +36,7 @@ for k in koreny_dcp:
     if im(k) < 10**21:
         koreny_dcp_re.append(re(k))
 Vm_dcp = min(koreny_dcp_re)
-ro_dcp_ = 3.452 # mol/l (NIST, 2018)
-ro_dcp = 1/(Vm_dcp*(10**3))
+ro_dcp_rk = 1/(Vm_dcp*(10**3))
 
 # Amagat
 Vm_rk = (0.25*Vm_oct + 0.75*Vm_dcp)
@@ -87,10 +83,12 @@ rovnice_ = Vk*(((pk*Vk)/(R*Tk))**(((1-T)/Tk)**(2/7)))
 Vm_oct = N(rovnice_.subs([(Tk, Tk_oct), (pk, pk_oct)]))
 if im(Vm_oct) < 10**21:
     Vm_oct = re(Vm_oct)
+ro_oct_r = 1/(Vm_oct*(10**3))
 
 Vm_dcp = N(rovnice_.subs([(Tk, Tk_dcp), (pk, pk_dcp)]))
 if im(Vm_dcp) < 10**21:
     Vm_dcp = re(Vm_dcp)
+ro_dcp_r = 1/(Vm_dcp*(10**3))
 
 # Amagat
 Vm_r = (0.25*Vm_oct + 0.75*Vm_dcp)
@@ -125,11 +123,15 @@ if im(Vm_) < 10**21:
 ro_r_j = 1/(Vm_*(10**3))
 
 # Výsledné výsledky
-print('ro_oct = ' + str(ro_oct) + ' mol/l\n')
-print('ro_dcp = ' + str(ro_dcp) + ' mol/l\n')
+print('ro_oct_rk = ' + str(ro_oct_rk) + ' mol/l\n')
+print('ro_dcp_rk = ' + str(ro_dcp_rk) + ' mol/l\n')
+print('ro_oct_r = ' + str(ro_oct_r) + ' mol/l\n')
+print('ro_dcp_r = ' + str(ro_dcp_r) + ' mol/l\n')
+print('\n\n')
 print('ro_smes_rk_a = ' + str(ro_rk_a) + ' mol/l\n')
 print('ro_smes_rk_k = ' + str(ro_rk_k) + ' mol/l\n')
 print('ro_smes_rk_j = ' + str(ro_rk_j) + ' mol/l\n')
+print('\n\n')
 print('ro_smes_r_a = ' + str(ro_r_a) + ' mol/l\n')
 print('ro_smes_r_k = ' + str(ro_r_k) + ' mol/l\n')
 print('ro_smes_r_j = ' + str(ro_r_j) + ' mol/l\n')
