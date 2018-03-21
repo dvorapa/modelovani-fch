@@ -44,3 +44,7 @@ print(N(numdiff_p))
 
 # Výsledné výsledky
 #print('ro_chb_rk = ' + str(ro_chb_rk) + ' mol/l\n')
+#http://docs.sympy.org/latest/tutorial/calculus.html
+#https://docs.scipy.org/doc/scipy/reference/generated/scipy.misc.derivative.html
+#https://webbook.nist.gov/cgi/cbook.cgi?ID=C108907&Units=SI&Mask=4#Thermo-Phase
+#https://stackoverflow.com/questions/9876290/how-do-i-compute-derivative-using-numpy
