@@ -51,8 +51,8 @@ del_H_num = N(del_H_num/1000)
 del_H_anal = N(del_H_anal/1000)
 
 # Výsledné výsledky
-print('del_H_vyp_num = ' + str(del_H_num) + 'kJ/mol\n')
-print('del_H_vyp_anal = ' + str(del_H_anal) + 'kJ/mol\n')
+print('del_H_vyp_num = ' + str(del_H_num) + ' kJ/mol\n')
+print('del_H_vyp_anal = ' + str(del_H_anal) + ' kJ/mol\n')
 print('del_H_vyp_tab = 48.1 kJ/mol (Liu and Dickhut, 1994; NIST 2018)\n')
 
 #http://docs.sympy.org/latest/tutorial/calculus.html
