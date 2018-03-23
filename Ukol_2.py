@@ -3,6 +3,7 @@ from sympy import *
 Vm = Symbol('Vm')
 Tk = Symbol('Tk')
 pk = Symbol('pk')
+Vk = Symbol('Vk')
 R = 8.314
 
 ## Nadefinované podmínky
@@ -12,10 +13,14 @@ p = 101325 # Pa
 # Kritické veličiny pro kys. octovou (Prausnitz et al., 2001; NIST, 2018)
 Tk_oct = 592.7 # K
 pk_oct = 57.9 * 10**5 # Pa
+rok_oct = 5.84 # mol/l (Vandana a Teja, 1995; NIST, 2018)
+Vk_oct = 1/(rok_oct*1000)
 
 # Kritické veličiny pro 1,2-dichloropropan (Steele et al., 1997; NIST, 2018)
 Tk_dcp = 578 # K
 pk_dcp = 46.5 * 10**5 # Pa
+rok_dcp = 3.452 # mol/l
+Vk_dcp = 1/(rok_dcp*1000)
 
 ## Redlich-Kwong
 a = (0.42748*(R**2)*(Tk**2.5))/pk
@@ -77,15 +82,14 @@ Vm_ = min(koreny_re_)
 ro_rk_j = 1/(Vm_*(10**3))
 
 ## Rackett
-Vk = R*Tk/pk
 rovnice_ = Vk*(((pk*Vk)/(R*Tk))**(((1-T)/Tk)**(2/7)))
 
-Vm_oct = N(rovnice_.subs([(Tk, Tk_oct), (pk, pk_oct)]))
+Vm_oct = N(rovnice_.subs([(Tk, Tk_oct), (pk, pk_oct), (Vk, Vk_oct)]))
 if im(Vm_oct) < 10**21:
     Vm_oct = re(Vm_oct)
 ro_oct_r = 1/(Vm_oct*(10**3))
 
-Vm_dcp = N(rovnice_.subs([(Tk, Tk_dcp), (pk, pk_dcp)]))
+Vm_dcp = N(rovnice_.subs([(Tk, Tk_dcp), (pk, pk_dcp), (Vk, Vk_dcp)]))
 if im(Vm_dcp) < 10**21:
     Vm_dcp = re(Vm_dcp)
 ro_dcp_r = 1/(Vm_dcp*(10**3))
@@ -97,30 +101,12 @@ ro_r_a = 1/(Vm_r*(10**3))
 # Kay
 Tk_ = 0.25*Tk_oct + 0.75*Tk_dcp
 pk_ = 0.25*pk_oct + 0.75*pk_dcp
+Vk_ = 0.25*Vk_oct + 0.75*Vk_dcp
 
-Vm_ = N(rovnice_.subs([(Tk, Tk_), (pk, pk_)]))
+Vm_ = N(rovnice_.subs([(Tk, Tk_), (pk, pk_), (Vk, Vk_)]))
 if im(Vm_) < 10**21:
     Vm_ = re(Vm_)
 ro_r_k = 1/(Vm_*(10**3))
-
-# Joffe
-K1 = (((0.25*Tk_oct)/sqrt(pk_oct)) + ((0.75*Tk_dcp)/sqrt(pk_dcp)))
-K2 = 0
-seznam_x = (0.25, 0.75)
-seznam_Tk = (Tk_oct, Tk_dcp)
-seznam_pk = (pk_oct, pk_dcp)
-for i in range(2):
-    for j in range(2):
-        K2 += seznam_x[i]*seznam_x[j]*((((seznam_Tk[i]/seznam_pk[i])**(1/3))+((seznam_Tk[j]/seznam_pk[j])**(1/3)))**3)
-K2 *= 0.125
-
-Tk_ = (K1**2)/K2
-pk_ = (K1/K2)**2
-
-Vm_ = N(rovnice_.subs([(Tk, Tk_), (pk, pk_)]))
-if im(Vm_) < 10**21:
-    Vm_ = re(Vm_)
-ro_r_j = 1/(Vm_*(10**3))
 
 # Výsledné výsledky
 print('ro_oct_rk = ' + str(ro_oct_rk) + ' mol/l\n')
@@ -134,4 +120,3 @@ print('ro_smes_rk_j = ' + str(ro_rk_j) + ' mol/l\n')
 print('\n\n')
 print('ro_smes_r_a = ' + str(ro_r_a) + ' mol/l\n')
 print('ro_smes_r_k = ' + str(ro_r_k) + ' mol/l\n')
-print('ro_smes_r_j = ' + str(ro_r_j) + ' mol/l\n')
