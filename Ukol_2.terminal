@@ -2,9 +2,9 @@ ro_oct_rk = 11.4174563570428 mol/l
 
 ro_dcp_rk = 9.32709171288515 mol/l
 
-ro_oct_r = 1.17498850073862 mol/l
+ro_oct_r = 25.7414980659569 mol/l
 
-ro_dcp_r = 0.967642855299728 mol/l
+ro_dcp_r = 9.77125491551914 mol/l
 
 
 
@@ -18,8 +18,6 @@ ro_smes_rk_j = 9.78550432988241 mol/l
 
 
 
-ro_smes_r_a = 1.01230210810346 mol/l
+ro_smes_r_a = 11.5650128689377 mol/l
 
-ro_smes_r_k = 1.02046176794495 mol/l
-
-ro_smes_r_j = 1.01343643589259 mol/l
+ro_smes_r_k = 11.6103216219505 mol/l
