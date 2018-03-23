@@ -1,5 +1,5 @@
-del_H_vyp_num = 0.608303710078070 kJ/mol
+del_H_vyp_num = 41.3248169720249 kJ/mol
 
-del_H_vyp_anal = 0.608303714485167 kJ/mol
+del_H_vyp_anal = 41.3248172714188 kJ/mol
 
-del_H_vyp_tab = 48.1 kJ/mol (Liu and Dickhut, 1994; NIST 2018)
+del_H_vyp_tab = 41 ± 4 kJ/mol (průměr více exp. hodnot; NIST 2018)
