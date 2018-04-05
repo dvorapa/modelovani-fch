@@ -108,6 +108,25 @@ if im(Vm_) < 10**21:
     Vm_ = re(Vm_)
 ro_r_k = 1/(Vm_*(10**3))
 
+# Joffe
+K1 = (((0.25*Tk_oct)/sqrt(pk_oct)) + ((0.75*Tk_dcp)/sqrt(pk_dcp)))
+K2 = 0
+seznam_x = (0.25, 0.75)
+seznam_Tk = (Tk_oct, Tk_dcp)
+seznam_pk = (pk_oct, pk_dcp)
+for i in range(2):
+    for j in range(2):
+        K2 += seznam_x[i]*seznam_x[j]*((((seznam_Tk[i]/seznam_pk[i])**(1/3))+((seznam_Tk[j]/seznam_pk[j])**(1/3)))**3)
+K2 *= 0.125
+
+Tk_ = (K1**2)/K2
+pk_ = (K1/K2)**2
+
+Vm_ = N(rovnice_.subs([(Tk, Tk_), (pk, pk_), (Vk, Vk_)]))
+if im(Vm_) < 10**21:
+    Vm_ = re(Vm_)
+ro_r_j = 1/(Vm_*(10**3))
+
 # Výsledné výsledky
 print('ro_oct_rk = ' + str(ro_oct_rk) + ' mol/l\n')
 print('ro_dcp_rk = ' + str(ro_dcp_rk) + ' mol/l\n')
@@ -120,3 +139,4 @@ print('ro_smes_rk_j = ' + str(ro_rk_j) + ' mol/l\n')
 print('\n\n')
 print('ro_smes_r_a = ' + str(ro_r_a) + ' mol/l\n')
 print('ro_smes_r_k = ' + str(ro_r_k) + ' mol/l\n')
+print('ro_smes_r_j = ' + str(ro_r_j) + ' mol/l\n')
