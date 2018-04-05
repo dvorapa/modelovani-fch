@@ -21,3 +21,5 @@ ro_smes_rk_j = 9.78550432988241 mol/l
 ro_smes_r_a = 11.5650128689377 mol/l
 
 ro_smes_r_k = 11.6103216219505 mol/l
+
+ro_smes_r_j = 11.7178078030084 mol/l
