@@ -127,7 +127,7 @@ if im(Vm_) < 10**21:
     Vm_ = re(Vm_)
 ro_r_j = 1/(Vm_*(10**3))
 
-# Výsledné výsledky
+# Výsledné hustoty látek a směsí
 print('ro_oct_rk = ' + str(ro_oct_rk) + ' mol/l\n')
 print('ro_dcp_rk = ' + str(ro_dcp_rk) + ' mol/l\n')
 print('ro_oct_r = ' + str(ro_oct_r) + ' mol/l\n')
