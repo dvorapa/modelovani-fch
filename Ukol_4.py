@@ -56,4 +56,4 @@ del_Hr = del_Hr_\
 + integrate(funkce_.subs([(x, s), (Cpx, Cps)]), (T, T1, T2))
 
 # Výsledná entalpie reakce
-print('del_Hr = ' + str(del_Hr) + ' J/mol\n')
+print('del_Hr = ' + str(del_Hr) + ' J/mol')
