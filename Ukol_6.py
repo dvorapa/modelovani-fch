@@ -5,21 +5,21 @@ x1, x2, x3, x4 = symbols('x1 x2 x3 x4', real=True)
 zA, zK = symbols('zA zK', real=True)
 
 ## Nadefinované podmínky
-T = 293.15 + 25 # K
-c = 0.07 # M (mol/l = mol/kg)
+T = 273.15 + 25 # K
+c = 0.07 # M (mol/l = mol/kg) #########################
 cw = 997/18.016
 
 ## Tabulkové hodnoty disociačních koeficientů (Wikipedie, 2018)
 pK_H2BO3_ = 9.24
 pK_HBO3_2 = 12.4
 pK_BO3_3 = 13.3
-pK_OH_ = 7
+pK_H2O_ = 14
 
 ## Mezivýpočet disociačních konstant K
 K1 = 10**(-pK_H2BO3_)
 K2 = 10**(-pK_HBO3_2)
 K3 = 10**(-pK_BO3_3)
-Kw = 10**(-pK_OH_)
+Kw = 10**(-pK_H2O_)
 
 ## Iterace
 x_old = [1, 2, 3, 4]
