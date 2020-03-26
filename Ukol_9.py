@@ -22,7 +22,7 @@ while i < len(c_pred):
     an = del_c/m_adsorbentu # mol/g
     a.append(an)
 
-    c.append(c_pred[i] * V_smesi) # mol
+    c.append(c_po[i] * V_smesi) # mol
 
     i += 1
 
