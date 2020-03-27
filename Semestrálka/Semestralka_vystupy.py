@@ -35,7 +35,7 @@ def graf_gammy(metoda, mix, vysledky):
 
 def graf_logaritmu(metoda, mix, vysledky):
   # Graf logaritmu poměru aktivitních koeficientů
-  plt.figure()
+  plt.figure(figsize = (9, 4))
   plt.plot(vysledky[0], vysledky[4], 'gD--', ms=5)
   plt.xlabel('x1 [hm. %]')
   plt.ylabel('ln(γ1/γ2)')
@@ -48,7 +48,7 @@ def graf_logaritmu(metoda, mix, vysledky):
 
 def graf_Q(metoda, vysledky):
   # Graf Gibbsovy energie
-  plt.figure(figsize = (9, 3))
+  plt.figure(figsize = (9, 4))
   plt.plot(vysledky[0][0], vysledky[0][3], 'b^--', vysledky[1][0], vysledky[1][3], 'rD--', ms=5)
   plt.legend(tuple('směs ' + ' + '.join(mix) for mix in mixy))
   plt.xlabel('x1 [hm. %]')
