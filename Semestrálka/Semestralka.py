@@ -16,6 +16,7 @@ mixy = (mix1, mix2)
 
 # Známé konstanty
 R = 8.314
+T0 = 273.15
 
 M = (120.1485, 131.388, 84.1595) # Zdroj databáze https://webbook.nist.gov/chemistry/
 
@@ -43,9 +44,9 @@ for (ro_VL, M_VL) in zip(ro, M):
 A, B = symbols('A B')
 
 # Příprava rovnic pro aktivitní koeficienty a Gibbsovu energii
-rovn1 = exp(A / (R * T * ((1 + ((A * x1)/(B * x2)))**2)))
-rovn2 = exp(B / (R * T * ((1 + ((B * x2)/(A * x1)))**2)))
-rovnQ = (A * B * x1 * x2) / (A * x1 + B * x2)
+rovn1 = exp(B / (R * (T - T0) * ((1 + ((B * x1)/(A * x2)))**2)))
+rovn2 = exp(A / (R * (T - T0) * ((1 + ((A * x2)/(B * x1)))**2)))
+rovnQ = (A * B * x1 * x2) / (A * x2 + B * x1)
 
 # Výpočet aktivitních koeficientů γ1 a γ2 pro jednotlivé směsi
 vysl = []
@@ -83,8 +84,10 @@ metoda = 'NRTL'
 print('\n' + metoda)
 
 # Experimentální data a konstanty pro NRTL dle Anily et al. (https://doi.org/10.1016/j.molliq.2014.12.026)
+# Poznámka: U směsi A + C autoři uvádí konstanty zhruba 6,4× menší, než by odpovídalo skutečnosti.
 b__mix1 = (51.23, 49.88)
 b__mix2 = (333.72, 390.89)
+b__mix2 = tuple(b / 6.4 for b in b__mix2)
 b__ = (b__mix1, b__mix2)
 
 alpha = 0.3
@@ -92,16 +95,16 @@ alpha = 0.3
 # Výpočet NRTL koeficientů tau1 a tau2 a funkcí g12 a g21
 b12, b21 = symbols('b12 b21')
 
-tau12 = b12 / T
-tau21 = b21 / T
+tau12 = b12 / (R * (T - T0))
+tau21 = b21 / (R * (T - T0))
 
 g12 = exp(-alpha * tau12)
 g21 = exp(-alpha * tau21)
 
 # Příprava rovnic pro aktivitní koeficienty a Gibbsovu energii
-rovn1 = exp((x2**2) * (((tau21 * exp(-2 * alpha * tau21)) / ((x1 + x2 * g21)**2)) + ((tau12 * g12) / ((x2 + x1 * g12)**2))))
-rovn2 = exp((x1**2) * (((tau12 * exp(-2 * alpha * tau12)) / ((x2 + x1 * g12)**2)) + ((tau21 * g21) / ((x1 + x2 * g21)**2))))
-rovnQ = x1 * x2 * (((tau21 * g21) / (x1 + x2 * g21)) + ((tau12 * g12) / (x2 + x1 * g12)))
+rovn1 = exp((x2**2) * (((tau12 * g12**2) / ((x1 + x2 * g12)**2)) + ((tau21 * g21) / ((x2 + x1 * g21)**2))))
+rovn2 = exp((x1**2) * (((tau21 * g21**2) / ((x2 + x1 * g21)**2)) + ((tau12 * g12) / ((x1 + x2 * g12)**2))))
+rovnQ = (x1 * x2 * (((tau21 * g21) / (x2 + x1 * g21)) + ((tau12 * g12) / (x1 + x2 * g12)))) * (R * (T - T0))
 
 # Výpočet aktivitních koeficientů γ1 a γ2 pro jednotlivé směsi
 vysl = []
